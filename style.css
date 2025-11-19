@@ -199,6 +199,201 @@ header h1 {
     position: fixed;
     width: 10px;
     height: 10px;
+    --card-bg: #16213E;
+    --font-main: 'Fredoka', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: radial-gradient(#2C3E50 2px, transparent 2px);
+    background-size: 30px 30px;
+}
+
+.game-container {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+    border: 4px solid var(--secondary-color);
+}
+
+header h1 {
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 0px var(--accent-color);
+}
+
+.score-board {
+    font-size: 1.5rem;
+    color: #2C3E50;
+    background: var(--accent-color);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    display: inline-block;
+    margin-bottom: 2rem;
+    font-weight: bold;
+}
+
+.question-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    font-size: 4rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--secondary-color);
+}
+
+.visual-aid {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    min-height: 60px;
+}
+
+.star-group {
+    display: flex;
+    gap: 0.25rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.visual-star {
+    font-size: 2rem;
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.options-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-weight: bold;
+    margin-top: 1rem;
+}
+
+.drop-zone {
+    width: 80px;
+    height: 80px;
+    border: 3px dashed #4ECDC4;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    color: #4ECDC4;
+    background-color: rgba(78, 205, 196, 0.1);
+    transition: all 0.3s ease;
+}
+
+.drop-zone.drag-over {
+    border-color: #FFE66D;
+    background-color: rgba(255, 230, 109, 0.2);
+    transform: scale(1.1);
+}
+
+.drop-zone.correct {
+    border-color: #27ae60;
+    background-color: rgba(39, 174, 96, 0.2);
+    color: #27ae60;
+    border-style: solid;
+}
+
+.option-btn {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 0;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    border-radius: 15px;
+    cursor: grab;
+    font-family: var(--font-main);
+    transition: transform 0.1s, background-color 0.2s;
+    box-shadow: 0 4px 0 #2A9D8F;
+    user-select: none;
+    touch-action: none;
+    /* Critical for custom touch handling */
+}
+
+.option-btn:active {
+    cursor: grabbing;
+    transform: translateY(4px);
+    box-shadow: none;
+}
+
+.option-btn.dragging {
+    opacity: 0.8;
+    transform: scale(1.1);
+    z-index: 1000;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.message {
+    margin-top: 1.5rem;
+    font-size: 1.5rem;
+    height: 2rem;
+    font-weight: bold;
+}
+
+@keyframes popIn {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    75% {
+        transform: translateX(5px);
+    }
+}
+
+.shake {
+    animation: shake 0.4s ease-in-out;
+}
+
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
     background-color: #f00;
     animation: fall linear forwards;
     z-index: 100;
@@ -207,5 +402,88 @@ header h1 {
 @keyframes fall {
     to {
         transform: translateY(100vh) rotate(720deg);
+    }
+}
+
+/* Mode Switch Styles */
+.mode-switch {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.mode-btn {
+    background-color: var(--card-bg);
+    color: var(--secondary-color);
+    border: 2px solid var(--secondary-color);
+    padding: 0.5rem 1.5rem;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    cursor: pointer;
+    font-family: var(--font-main);
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.mode-btn.active {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.mode-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(78, 205, 196, 0.3);
+}
+
+/* Number Line Styles */
+#number-line-aid {
+    width: 100%;
+    overflow-x: auto;
+    padding: 1rem 0;
+}
+
+.number-line-svg {
+    width: 100%;
+    min-width: 500px;
+    /* Ensure it doesn't get too squished */
+    height: 120px;
+}
+
+.nl-line {
+    stroke: var(--text-color);
+    stroke-width: 2;
+    stroke-linecap: round;
+}
+
+.nl-tick {
+    stroke: var(--text-color);
+    stroke-width: 2;
+}
+
+.nl-text {
+    fill: var(--text-color);
+    font-family: var(--font-main);
+    font-size: 14px;
+    text-anchor: middle;
+}
+
+.nl-jump {
+    fill: none;
+    stroke: var(--primary-color);
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: drawJump 1s forwards;
+}
+
+.nl-dot {
+    fill: var(--secondary-color);
+}
+
+@keyframes drawJump {
+    to {
+        stroke-dashoffset: 0;
     }
 }

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Super Star Addition!</title>
+    <title>Super Star Math!</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
 </head>
@@ -12,7 +12,11 @@
 <body>
     <div class="game-container">
         <header>
-            <h1>Super Star Addition!</h1>
+            <h1>Super Star Math!</h1>
+            <div class="mode-switch">
+                <button id="btn-add" class="mode-btn active" onclick="setMode('addition')">Addition (+)</button>
+                <button id="btn-sub" class="mode-btn" onclick="setMode('subtraction')">Subtraction (-)</button>
+            </div>
             <div class="score-board">
                 <span>Stars: </span><span id="score">0</span> <span class="star-icon">⭐</span>
             </div>
@@ -21,7 +25,7 @@
         <main>
             <div class="question-area">
                 <div class="number-display" id="num1">2</div>
-                <div class="operator">+</div>
+                <div class="operator" id="operator">+</div>
                 <div class="number-display" id="num2">3</div>
                 <div class="operator">=</div>
                 <div class="drop-zone" id="drop-zone">?</div>
@@ -29,6 +33,10 @@
 
             <div class="visual-aid" id="visual-aid">
                 <!-- Stars will be generated here -->
+            </div>
+
+            <div class="visual-aid" id="number-line-aid" style="display: none;">
+                <!-- Number line will be generated here -->
             </div>
 
             <div class="options-container" id="options">
